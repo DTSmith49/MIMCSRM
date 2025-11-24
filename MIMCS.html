@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIM Cybersecurity & Risk Management Track Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            padding: 1.5rem;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #454545;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #757575;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .year-section {
+            margin-bottom: 1.25rem;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .year-header {
+            background: #f1f1f1;
+            color: #000000;
+            padding: 0.75rem 1.25rem;
+            border-radius: 2px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid #E21833;
+            transition: all 0.2s ease;
+        }
+
+        .year-header:hover {
+            background: #e6e6e6;
+        }
+
+        .year-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        .credits-badge {
+            background-color: #E21833;
+            color: #ffffff;
+            padding: 0.35rem 0.75rem;
+            border-radius: 2px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            border: none;
+        }
+
+        .semesters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+            padding-left: 0;
+        }
+
+        .semester-card {
+            background: #fafafa;
+            border: 1px solid #e6e6e6;
+            border-radius: 0;
+            padding: 1rem;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .semester-card::before {
+            display: none;
+        }
+
+        .semester-card:hover {
+            background: #f1f1f1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .semester-title {
+            color: #000000;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #E21833;
+        }
+
+        .course-list {
+            list-style: none;
+        }
+
+        .course-item {
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.5rem;
+            background: #ffffff;
+            border-left: 3px solid #e6e6e6;
+            border-radius: 0;
+            transition: all 0.2s ease;
+        }
+
+        .course-item:hover {
+            background: #ffffff;
+            border-left-color: #E21833;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .course-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .course-code {
+            font-weight: 600;
+            color: #000000;
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .course-note {
+            color: #757575;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .undergrad-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #e6e6e6;
+            border-radius: 2px;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.85rem;
+            background: #ffffff;
+            color: #000000;
+            transition: border-color 0.2s ease;
+        }
+
+        .course-input-wrapper {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .course-input-wrapper input {
+            flex: 1;
+        }
+
+        .credit-select {
+            padding: 0.5rem;
+            border: 1px solid #e6e6e6;
+            border-radius: 2px;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.85rem;
+            background: #ffffff;
+            color: #000000;
+            cursor: pointer;
+            min-width: 80px;
+        }
+
+        .credit-select:focus {
+            outline: none;
+            border-color: #E21833;
+            box-shadow: 0 0 0 2px rgba(226, 24, 51, 0.1);
+        }
+
+        .course-credits {
+            color: #E21833;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .undergrad-input:focus {
+            outline: none;
+            border-color: #E21833;
+            box-shadow: 0 0 0 2px rgba(226, 24, 51, 0.1);
+        }
+
+        .undergrad-input::placeholder {
+            color: #b0b0b0;
+            font-style: italic;
+        }
+
+        .editable-section {
+            background: transparent;
+            border: none;
+            padding: 0.25rem 0;
+        }
+
+        .added-course {
+            background: #ffffff;
+            border-left: 3px solid #E21833;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0;
+            transition: all 0.2s ease;
+        }
+
+        .added-course:hover {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .remove-btn {
+            background: #E21833;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .remove-btn:hover {
+            background: #c01429;
+        }
+
+        .total-credits {
+            background: #E21833;
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: 0;
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .semesters {
+                grid-template-columns: 1fr;
+            }
+
+            .year-header {
+                padding: 1rem 1.25rem;
+            }
+
+            .year-title {
+                font-size: 1.3rem;
+            }
+
+            .credits-badge {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .year-section {
+                animation: none;
+            }
+
+            .year-header:hover,
+            .semester-card:hover,
+            .course-item:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Combined Program Plan: MIM Cybersecurity &amp; Risk Management Track</h1>
+        <p class="subtitle">Master of Information Management Course Timeline</p>
+
+        <div style="max-width: 400px; margin: 0 auto 1.5rem; text-align: center;">
+            <input type="text" id="studentName" class="undergrad-input" placeholder="Enter your name (optional)" style="margin-bottom: 0.75rem;">
+            <button onclick="exportToPDF()" style="background: #E21833; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 2px; cursor: pointer; font-size: 0.9rem; font-weight: 600; width: 100%; transition: background 0.2s ease;">Export to PDF</button>
+        </div>
+
+        <div class="timeline">
+            <!-- Junior Year -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-title">Junior Year</span>
+                    <span class="credits-badge">6 Graduate Credits</span>
+                </div>
+                <div class="semesters">
+                    <div class="semester-card">
+                        <div class="semester-title">Fall Semester</div>
+                        <ul class="course-list">
+                            <li class="course-item">
+                                <div class="course-code">INFM600</div>
+                                <div class="course-note">Information Management Ecosystems</div>
+                            </li>
+                            <li class="course-item editable-section">
+                                <div class="course-input-wrapper">
+                                    <input type="text" class="undergrad-input" placeholder="Add undergraduate course..." data-year="junior" data-semester="fall">
+                                    <select class="credit-select" data-year="junior" data-semester="fall">
+                                        <option value="1">1 credit</option>
+                                        <option value="3" selected>3 credits</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="semester-card">
+                        <div class="semester-title">Spring Semester</div>
+                        <ul class="course-list">
+                            <li class="course-item">
+                                <div class="course-code">MIM Elective</div>
+                            </li>
+                            <li class="course-item editable-section">
+                                <div class="course-input-wrapper">
+                                    <input type="text" class="undergrad-input" placeholder="Add undergraduate course..." data-year="junior" data-semester="spring">
+                                    <select class="credit-select" data-year="junior" data-semester="spring">
+                                        <option value="1">1 credit</option>
+                                        <option value="3" selected>3 credits</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Senior Year -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-title">Senior Year</span>
+                    <span class="credits-badge">6 Graduate Credits</span>
+                </div>
+                <div class="semesters">
+                    <div class="semester-card">
+                        <div class="semester-title">Fall Semester</div>
+                        <ul class="course-list">
+                            <li class="course-item">
+                                <div class="course-code">INST771</div>
+                                <div class="course-note">Cybersecurity Risk Management</div>
+                            </li>
+                            <li class="course-item editable-section">
+                                <div class="course-input-wrapper">
+                                    <input type="text" class="undergrad-input" placeholder="Add undergraduate course..." data-year="senior" data-semester="fall">
+                                    <select class="credit-select" data-year="senior" data-semester="fall">
+                                        <option value="1">1 credit</option>
+                                        <option value="3" selected>3 credits</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="semester-card">
+                        <div class="semester-title">Spring Semester</div>
+                        <ul class="course-list">
+                            <li class="course-item">
+                                <div class="course-code">INST726</div>
+                                <div class="course-note">Information Governance</div>
+                            </li>
+                            <li class="course-item editable-section">
+                                <div class="course-input-wrapper">
+                                    <input type="text" class="undergrad-input" placeholder="Add undergraduate course..." data-year="senior" data-semester="spring">
+                                    <select class="credit-select" data-year="senior" data-semester="spring">
+                                        <option value="1">1 credit</option>
+                                        <option value="3" selected>3 credits</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summer -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-title">Summer Session</span>
+                    <span class="credits-badge">3 Credits</span>
+                </div>
+                <div class="semesters">
+                    <div class="semester-card">
+                        <div class="semester-title">Summer</div>
+                        <ul class="course-list">
+                            <li class="course-item">
+                                <div class="course-code">Graduate Elective</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Year -->
+            <div class="year-section">
+                <div class="year-header">
+                    <span class="year-title">Final Year</span>
+                    <span class="credits-badge">21 Credits</span>
+                </div>
+                <div class="semesters">
+                    <div class="semester-card">
+                        <div class="semester-title">Fall Semester</div>
+                        <ul class="course-list">
+                            <li class="course-item">
+                                <div class="course-code">INST756</div>
+                                <div class="course-note">Information Risk Management</div>
+                            </li>
+                            <li class="course-item">
+                                <div class="course-code">INST###</div>
+                                <div class="course-note">Human-Centered Cybersecurity</div>
+                            </li>
+                            <li class="course-item">
+                                <div class="course-code">MIM Elective</div>
+                            </li>
+                            <li class="course-item editable-section">
+                                <div class="course-input-wrapper">
+                                    <input type="text" class="undergrad-input" placeholder="Add undergraduate course..." data-year="junior" data-semester="spring">
+                                    <select class="credit-select" data-year="junior" data-semester="spring">
+                                        <option value="1">1 credit</option>
+                                        <option value="3" selected>3 credits</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="semester-card">
+                        <div class="semester-title">Winter Session</div>
+                        <ul class="course-list">
+                            <li class="course-item">
+                                <div class="course-code">INST633</div>
+                                <div class="course-note">MIM Elective</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="semester-card">
+                        <div class="semester-title">Spring Semester</div>
+                        <ul class="course-list">
+                            <li class="course-item">
+                                <div class="course-code">INFM737</div>
+                                <div class="course-note">Capstone</div>
+                            </li>
+                            <li class="course-item">
+                                <div class="course-code">INST663</div>
+                                <div class="course-note">Network Infrastructure</div>
+                            </li>
+                            <li class="course-item">
+                                <div class="course-code">INST664</div>
+                                <div class="course-note">Cyberdefense and Ethical Hacking</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="total-credits" id="totalCredits">
+            Total Program: 36 Graduate Credits | Undergraduate Credits: 0
+        </div>
+    </div>
+
+    <script>
+        // Store added courses with credits
+        const addedCourses = {
+            junior: { fall: [], spring: [] },
+            senior: { fall: [], spring: [] }
+        };
+
+        function updateTotalCredits() {
+            let undergradCredits = 0;
+            Object.keys(addedCourses).forEach(year => {
+                Object.keys(addedCourses[year]).forEach(semester => {
+                    addedCourses[year][semester].forEach(course => {
+                        undergradCredits += parseInt(course.credits) || 0;
+                    });
+                });
+            });
+            
+            const totalElement = document.getElementById('totalCredits');
+            if (totalElement) {
+                totalElement.textContent = `Total Program: 36 Graduate Credits | Undergraduate Credits: ${undergradCredits}`;
+            }
+        }
+
+        // Handle input for adding courses
+        document.querySelectorAll('.undergrad-input').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim()) {
+                    const year = this.dataset.year;
+                    const semester = this.dataset.semester;
+                    const courseName = this.value.trim();
+                    const creditSelect = this.parentElement.querySelector('.credit-select');
+                    const credits = creditSelect ? creditSelect.value : '3';
+                    
+                    addCourse(year, semester, courseName, credits, this.parentElement.parentElement);
+                    this.value = '';
+                }
+            });
+        });
+
+        function addCourse(year, semester, courseName, credits, courseList) {
+            // Add to storage
+            addedCourses[year][semester].push({ name: courseName, credits: credits });
+            
+            // Create course element
+            const courseItem = document.createElement('li');
+            courseItem.className = 'course-item added-course';
+            courseItem.innerHTML = `
+                <div>
+                    <div class="course-code">${courseName}<span class="course-credits">${credits} cr</span></div>
+                    <div class="course-note">Undergraduate Course</div>
+                </div>
+                <button class="remove-btn" onclick="removeCourse(this, '${year}', '${semester}', '${courseName}')">Remove</button>
+            `;
+            
+            // Insert before the input field
+            const inputItem = courseList.querySelector('.editable-section');
+            courseList.insertBefore(courseItem, inputItem);
+            
+            updateTotalCredits();
+        }
+
+        function removeCourse(btn, year, semester, courseName) {
+            // Remove from storage
+            const index = addedCourses[year][semester].findIndex(course => course.name === courseName);
+            if (index > -1) {
+                addedCourses[year][semester].splice(index, 1);
+            }
+            
+            // Remove from DOM
+            btn.closest('.added-course').remove();
+            
+            updateTotalCredits();
+        }
+
+        // Load saved courses from localStorage on page load
+        window.addEventListener('load', function() {
+            const saved = localStorage.getItem('undergradCourses');
+            if (saved) {
+                const savedCourses = JSON.parse(saved);
+                Object.keys(savedCourses).forEach(year => {
+                    Object.keys(savedCourses[year]).forEach(semester => {
+                        savedCourses[year][semester].forEach(course => {
+                            const courseName = typeof course === 'string' ? course : course.name;
+                            const credits = typeof course === 'string' ? '3' : course.credits;
+                            const input = document.querySelector(`input.undergrad-input[data-year="${year}"][data-semester="${semester}"]`);
+                            if (input) {
+                                addCourse(year, semester, courseName, credits, input.closest('.course-list'));
+                            }
+                        });
+                    });
+                });
+            }
+        });
+
+        // Save courses to localStorage when page unloads
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('undergradCourses', JSON.stringify(addedCourses));
+        });
+
+        // Save student name to localStorage
+        const nameInput = document.getElementById('studentName');
+        if (nameInput) {
+            const savedName = localStorage.getItem('studentName');
+            if (savedName) nameInput.value = savedName;
+            
+            nameInput.addEventListener('input', function() {
+                localStorage.setItem('studentName', this.value);
+            });
+        }
+
+        // Export to PDF function using jsPDF
+        async function exportToPDF() {
+            const studentName = document.getElementById('studentName').value || 'Student';
+            
+            // Dynamically load jsPDF library
+            if (typeof window.jspdf === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+                document.head.appendChild(script);
+                
+                await new Promise((resolve) => {
+                    script.onload = resolve;
+                });
+            }
+            
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            let yPosition = 20;
+            const lineHeight = 7;
+            const pageHeight = doc.internal.pageSize.height;
+            
+            // Title
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Combined Program Plan: MIM Cybersecurity & Risk Management Track', 105, yPosition, { align: 'center' });
+            yPosition += 10;
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            if (studentName && studentName !== 'Student') {
+                doc.text(`Student: ${studentName}`, 105, yPosition, { align: 'center' });
+                yPosition += 10;
+            }
+            
+            // Helper function to check page break
+            function checkPageBreak(height) {
+                if (yPosition + height > pageHeight - 20) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+            }
+            
+            // Junior Year
+            checkPageBreak(15);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Junior Year (6 Graduate Credits)', 20, yPosition);
+            yPosition += lineHeight;
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'bold');
+            doc.text('Fall Semester:', 25, yPosition);
+            yPosition += lineHeight;
+            doc.setFont(undefined, 'normal');
+            doc.text('INFM600 - Information Management Ecosystems (3 cr)', 30, yPosition);
+            yPosition += lineHeight;
+            
+            addedCourses.junior.fall.forEach(course => {
+                checkPageBreak(lineHeight);
+                doc.text(`${course.name} - Undergraduate Course (${course.credits} cr)`, 30, yPosition);
+                yPosition += lineHeight;
+            });
+            
+            checkPageBreak(lineHeight);
+            doc.setFont(undefined, 'bold');
+            doc.text('Spring Semester:', 25, yPosition);
+            yPosition += lineHeight;
+            doc.setFont(undefined, 'normal');
+            doc.text('MIM Elective (3 cr)', 30, yPosition);
+            yPosition += lineHeight;
+            
+            addedCourses.junior.spring.forEach(course => {
+                checkPageBreak(lineHeight);
+                doc.text(`${course.name} - Undergraduate Course (${course.credits} cr)`, 30, yPosition);
+                yPosition += lineHeight;
+            });
+            
+            yPosition += 5;
+            
+            // Senior Year
+            checkPageBreak(15);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Senior Year (6 Graduate Credits)', 20, yPosition);
+            yPosition += lineHeight;
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'bold');
+            doc.text('Fall Semester:', 25, yPosition);
+            yPosition += lineHeight;
+            doc.setFont(undefined, 'normal');
+            doc.text('INST771 - Cybersecurity Risk Management (3 cr)', 30, yPosition);
+            yPosition += lineHeight;
+            
+            addedCourses.senior.fall.forEach(course => {
+                checkPageBreak(lineHeight);
+                doc.text(`${course.name} - Undergraduate Course (${course.credits} cr)`, 30, yPosition);
+                yPosition += lineHeight;
+            });
+            
+            checkPageBreak(lineHeight);
+            doc.setFont(undefined, 'bold');
+            doc.text('Spring Semester:', 25, yPosition);
+            yPosition += lineHeight;
+            doc.setFont(undefined, 'normal');
+            doc.text('INST726 - Information Governance (3 cr)', 30, yPosition);
+            yPosition += lineHeight;
+            
+            addedCourses.senior.spring.forEach(course => {
+                checkPageBreak(lineHeight);
+                doc.text(`${course.name} - Undergraduate Course (${course.credits} cr)`, 30, yPosition);
+                yPosition += lineHeight;
+            });
+            
+            yPosition += 5;
+            
+            // Summer Session
+            checkPageBreak(15);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Summer Session (3 Credits)', 20, yPosition);
+            yPosition += lineHeight;
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text('Graduate Elective (3 cr)', 25, yPosition);
+            yPosition += lineHeight + 5;
+            
+            // Final Year
+            checkPageBreak(30);
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.text('Final Year (21 Credits)', 20, yPosition);
+            yPosition += lineHeight;
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'bold');
+            doc.text('Fall Semester:', 25, yPosition);
+            yPosition += lineHeight;
+            doc.setFont(undefined, 'normal');
+            doc.text('INST756 - Information Risk Management (3 cr)', 30, yPosition);
+            yPosition += lineHeight;
+            doc.text('INST### - Human-Centered Cybersecurity (3 cr)', 30, yPosition);
+            yPosition += lineHeight;
+            doc.text('MIM Elective (3 cr)', 30, yPosition);
+            yPosition += lineHeight;
+            
+            checkPageBreak(lineHeight);
+            doc.setFont(undefined, 'bold');
+            doc.text('Winter Session:', 25, yPosition);
+            yPosition += lineHeight;
+            doc.setFont(undefined, 'normal');
+            doc.text('INST633 - MIM Elective (3 cr)', 30, yPosition);
+            yPosition += lineHeight;
+            
+            checkPageBreak(lineHeight * 4);
+            doc.setFont(undefined, 'bold');
+            doc.text('Spring Semester:', 25, yPosition);
+            yPosition += lineHeight;
+            doc.setFont(undefined, 'normal');
+            doc.text('INFM737 - Capstone (3 cr)', 30, yPosition);
+            yPosition += lineHeight;
+            doc.text('INST663 - Network Infrastructure (3 cr)', 30, yPosition);
+            yPosition += lineHeight;
+            doc.text('INST664 - Cyberdefense and Ethical Hacking (3 cr)', 30, yPosition);
+            yPosition += lineHeight + 10;
+            
+            // Total Credits
+            let undergradCredits = 0;
+            Object.keys(addedCourses).forEach(year => {
+                Object.keys(addedCourses[year]).forEach(semester => {
+                    addedCourses[year][semester].forEach(course => {
+                        undergradCredits += parseInt(course.credits) || 0;
+                    });
+                });
+            });
+            
+            checkPageBreak(10);
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'bold');
+            doc.text(`Total Program: 36 Graduate Credits | Undergraduate Credits: ${undergradCredits}`, 105, yPosition, { align: 'center' });
+            
+            // Save PDF
+            doc.save(`${studentName.replace(/\s+/g, '_')}_MIM_Cybersecurity_Plan.pdf`);
+        }
+    </script>
+</body>
+</html>
